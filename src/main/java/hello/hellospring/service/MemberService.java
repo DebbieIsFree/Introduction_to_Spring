@@ -3,16 +3,22 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service    // 컨테이너에 등록된다.
+//@Component
 public class MemberService {
 
+    // new MemberRepository() -> 매번 다른 인스턴스 객체 생성, memberRepository 공유 안됨
     private final MemberRepository memberRepository;
 
-    // new @@Repository() -> 다른 인스턴스 객체 생성, memberRepository 공유 안됨
     // 직접 생성이 아닌, 외부에서 주입하도록 변경
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
