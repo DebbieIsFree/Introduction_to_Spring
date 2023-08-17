@@ -6,6 +6,7 @@ import hello.hellospring.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-@SpringBootTest
-@Transactional
+@SpringBootTest     // 스프링 컨테니너 + 테스트
+@Transactional      // 테스트를 완료할 때마다 자동으로 롤백, DB 데이터 제거
 class MemberServiceIntegrationTest {
 
     @Autowired MemberService memberService;
@@ -22,10 +23,11 @@ class MemberServiceIntegrationTest {
 
 
     @Test
+//    @Commit     // DB에 반영
     public void 회원가입() throws Exception {
         //Given
         Member member = new Member();
-        member.setName("spring");
+        member.setName("hello");
 
         //When
         Long saveId = memberService.join(member);

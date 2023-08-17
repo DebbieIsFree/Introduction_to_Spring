@@ -6,12 +6,16 @@ import hello.hellospring.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 //@Service    // 컨테이너에 등록된다.
 //@Component
+// 서비스 계층에 Transaction 추가
+// JPA 사용 시, 필수 > JPA를 통한 모든 데이터 변경은 트랜잭션 안에서 실행
+@Transactional
 public class MemberService {
 
     // new MemberRepository() -> 매번 다른 인스턴스 객체 생성, memberRepository 공유 안됨
