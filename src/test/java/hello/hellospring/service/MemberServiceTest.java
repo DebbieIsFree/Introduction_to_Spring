@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// 스프링 없이 자바로 테스트 하는 코드
 class MemberServiceTest {
 
     MemberService memberService;
