@@ -1,13 +1,24 @@
 package hello.hellospring;
 
+import hello.hellospring.repository.JdbcMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import hello.hellospring.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.sql.DataSource;
+
 @Configuration  // 자바 코드로 스프링 빈 직접 등록
 public class SpringConfig {
+
+    private final DataSource dataSource;
+
+    @Autowired
+    public SpringConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     // 스프링 빈 등록
     @Bean
@@ -19,6 +30,11 @@ public class SpringConfig {
 
     @Bean
     public MemberRepository memberRepository(){  // MemberRepository는 인터페이스
-        return new MemoryMemberRepository();     // MemoryMemberRepository는 구현체
+//        return new MemoryMemberRepository();     // MemoryMemberRepository는 구현체
+
+        // Repository를 Memory에서 JDBC로 변경
+        // 변경 시, SpringConfig 설정 파일을 제외한 어느 것도 바꾸지 않음! (OCP)
+        // 즉, 구현체 바꿔 끼우기
+        return new JdbcMemberRepository(dataSource);
     }
 }
