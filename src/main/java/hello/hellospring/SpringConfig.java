@@ -1,6 +1,7 @@
 package hello.hellospring;
 
 import hello.hellospring.repository.JdbcMemberRepository;
+import hello.hellospring.repository.JdbcTemplateMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import hello.hellospring.service.MemberService;
@@ -35,6 +36,9 @@ public class SpringConfig {
         // Repository를 Memory에서 JDBC로 변경
         // 변경 시, SpringConfig 설정 파일을 제외한 어느 것도 바꾸지 않음! (OCP)
         // 즉, 구현체 바꿔 끼우기
-        return new JdbcMemberRepository(dataSource);
+//        return new JdbcMemberRepository(dataSource);
+
+        // Jdbc Template
+        return new JdbcTemplateMemberRepository(dataSource);
     }
 }
