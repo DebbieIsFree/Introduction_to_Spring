@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@Repository
+//@Repository   // 스프링 데이터 JPA 테스트 할 때 > 잠깐 주석 처리!!
 public class JdbcTemplateMemberRepository implements MemberRepository {
     // jdbcTemplate library -> jdbc 중복 코드 제거
 
