@@ -22,7 +22,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     // 직접 생성이 아닌, 외부에서 주입하도록 변경
-//    @Autowired
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }

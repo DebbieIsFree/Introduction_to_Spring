@@ -1,5 +1,6 @@
 package hello.hellospring;
 
+import hello.hellospring.aop.TimeTraceAop;
 import hello.hellospring.repository.*;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ public class SpringConfig {
     // 스프링 데이터 JPA
     private final MemberRepository memberRepository;
 
-
     public SpringConfig(MemberRepository memberRepository) {
 //        this.dataSource = dataSource;
 //        this.em = em;
@@ -30,7 +30,11 @@ public class SpringConfig {
         this.memberRepository = memberRepository;
     }
 
-
+    // AOP, 공통 관심 사항 분리 --> 직접 등록, but, @Component 스캔 사용 가능
+//    @Bean
+//    public TimeTraceAop timeTraceAop(){
+//        return new TimeTraceAop();
+//    }
 
     // 스프링 빈 등록
     @Bean
@@ -41,7 +45,6 @@ public class SpringConfig {
 
         return new MemberService(memberRepository);
     }
-
 
     // 스프링 데이터 JPA는 memberRepository() 주석 처리
 //    @Bean
